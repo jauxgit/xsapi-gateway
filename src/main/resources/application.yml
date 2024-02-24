@@ -1,0 +1,27 @@
+server:
+  port: 7749
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: api_route
+          uri: http://localhost:8123
+          predicates:
+            - Path=/api/**
+#          filters:
+#            - AddRequestHeader=xs, jaux
+#            - AddRequestParameter=name, xiaoyu
+dubbo:
+  application:
+    name: dubbo-xsapi-consumer
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: nacos://127.0.0.1:8848
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway: trace
